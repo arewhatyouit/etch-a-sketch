@@ -25,27 +25,26 @@ function initialSetup() {
   }
 }
 
-// TOFIX: Refactor this code for the resize button
+//TOFIX: input validation
 resizeBtn.addEventListener("click", function () {
-  let resize = prompt("Input grid size:", "16");
-  let size = parseInt(userInput, 10);
+  let input = prompt("Input a grid size ranging from 1-100:", "16");
+
+  if (input > 100 || input < 1) {
+    input = prompt("Invalid input, try again. Input a grid size ranging from 1-100:", "16");
+  } else {
+
+  let resize = parseInt(input, 10);
   height = resize;
   width = resize;
 
-  convert(height);
-});
-
-function convert() {
   const dim = 960 / height;
   const heightPx = dim + "px";
   const widthPx = dim + "px";
-  return {
-    heightPx,
-    widthPx
-  };
-}
 
-function resize(height, width, heightPx, widthPx) {
+
+    container.innerHTML = '';
+
+
   for (let i = 0; i < height * width; i++) {
     const grid = document.createElement("div");
     container.appendChild(grid);
@@ -60,4 +59,5 @@ function resize(height, width, heightPx, widthPx) {
       grid.style.backgroundColor = "darkgrey";
     });
   }
-}
+  }
+});
